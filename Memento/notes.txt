@@ -1,0 +1,4 @@
+Generally we need
+-Originator (some object whose state we will be saving)
+-Memento (saved state of the object)
+-Caretaker (Some list of the mementos)
