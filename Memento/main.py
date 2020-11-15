@@ -54,19 +54,26 @@ def main():
     some_wrapper.new_text_and_save(new_text="hello world 1")
     some_wrapper.new_text_and_save(new_text="hello world 2")
     some_wrapper.new_text_and_save(new_text="hello world 3")
-    some_wrapper.new_text_and_save(new_text="Click to cycle through states")
+    some_wrapper.new_text_and_save(
+        new_text="Use left and right keys to cycle through states"
+    )
     win = GraphWin(width=500, height=500)
     some_wrapper.originator.draw(win)
     index = len(some_wrapper.caretaker.saved_texts) - 1
     print(len(some_wrapper.caretaker.saved_texts))
     print(index)
     while index > 0:
+        keypress = win.getKey()
+        if keypress == "Left":
+            index = index - 1
+        elif keypress == "Right":
+            index = min(index + 1, len(some_wrapper.caretaker.saved_texts) - 1)
 
-        win.getMouse()
-        index = index - 1
         some_wrapper.originator.get_from_memento(
             some_wrapper.caretaker.get_memento(index=index)
         )
+    exit=Text(Point(100,100),text="Click to exit")
+    exit.draw(graphwin=win)
     win.getMouse()
     win.close()
 
